@@ -1,5 +1,11 @@
+# Folders to ignore
+debugging folder/
+.vscode/
+utils/
+
+
+# File extensions to ignore
 *.exe
 *.ilk
 *.obj
 *.pdb
-debugging folder/
