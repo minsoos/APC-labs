@@ -58,12 +58,6 @@ int main()
     return 0;
 }
 
-
-
-
-
-
-
 int check_sudoku(const unsigned sudoku[][SIZE])
 {
     if (!check_rows(sudoku)) {

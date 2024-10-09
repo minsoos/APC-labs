@@ -40,7 +40,7 @@ void get_col(unsigned *col, int num, const unsigned sudoku[][SIZE]) {
 }
 
 int check_cols(const unsigned sudoku[][SIZE]) {
-    unsigned *col;
+    unsigned col[SIZE];
     for (int i = 0; i < SIZE; i++) {
         get_col(col, i, sudoku);
 
@@ -62,7 +62,7 @@ void get_reg(unsigned *reg, int num, const unsigned sudoku[][SIZE]) {
 }
 
 int check_regions(const unsigned sudoku[][SIZE]) {
-    unsigned *reg;
+    unsigned reg[SIZE];
     for (int i = 0; i < SIZE; i++) {
         get_reg(reg, i, sudoku);
 
