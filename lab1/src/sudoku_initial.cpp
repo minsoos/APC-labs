@@ -4,22 +4,18 @@
 
 #include <iostream>
 
+
 using std::cout;
 using std::cin;
 using std::endl;
 
 const size_t SIZE = 9;
 
-
-
+#include <sudokuRB.h>
 
 /*
  * YOUR CODE GOES HERE
  */
-
-
-
-
 
 // Return:
 //         1 if sudoku matrix complies to all Sudoku rules
@@ -62,34 +58,27 @@ int main()
     return 0;
 }
 
-int search_key (const unsigned v[], unsigned n_elements, unsigned key)
-{
-    unsigned key_found = 0;
-
-    for (size_t i=0; i<n_elements; ++i)
-        if (v[i] == key)
-            key_found = 1;
-
-    return key_found;
-}
 
 
-
-
-/*
- * YOUR CODE GOES HERE
- */
 
 
 
 
 int check_sudoku(const unsigned sudoku[][SIZE])
 {
-    cout << "To be implemented" << endl;
-    /*
-    * YOUR CODE GOES HERE
-    */
-    return 0;
+    if (!check_rows(sudoku)) {
+        return -1;
+    }
+
+    if (!check_cols(sudoku)) {
+        return -2;
+    }
+
+    if (!check_regions(sudoku)) {
+        return -3;
+    }
+
+    return 1;
 }
 
 void generate_sudoku(unsigned sudoku[][SIZE])
