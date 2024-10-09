@@ -1,5 +1,5 @@
 #include <iostream>
-#include "sudokuRB.h"
+#include <sudokuRB.h>
 
 int search_key (const unsigned v[], unsigned n_elements, unsigned key)
 {
@@ -11,7 +11,6 @@ int search_key (const unsigned v[], unsigned n_elements, unsigned key)
 
     return key_found;
 }
-
 
 int basic_search (const unsigned v[], unsigned n_elements) {
     for (int i = 0; i < n_elements; i++) {
