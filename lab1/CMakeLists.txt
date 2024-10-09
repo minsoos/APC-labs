@@ -8,7 +8,7 @@ file(GLOB SOURCES "src/*.cpp")
 
 add_executable(lab1 ${SOURCES})
 
+enable_testing()
+
 add_subdirectory(libs/sudoku)
 target_link_libraries(${PROJECT_NAME} PRIVATE sudoku)
-
-enable_testing()
