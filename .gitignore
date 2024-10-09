@@ -2,6 +2,7 @@
 debugging folder/
 .vscode/
 utils/
+build/
 
 
 # File extensions to ignore
@@ -9,3 +10,4 @@ utils/
 *.ilk
 *.obj
 *.pdb
+*.py
