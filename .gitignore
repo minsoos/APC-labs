@@ -1,8 +1,10 @@
 # Folders to ignore
 debugging folder/
 .vscode/
+.idea/
 utils/
 build/
+cmake-build-debug/
 
 
 # File extensions to ignore
