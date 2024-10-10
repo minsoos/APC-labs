@@ -112,8 +112,3 @@ TEST(CheckRegionsTests, ValidSudokuRegions) {
     };
     EXPECT_EQ(check_regions(sudoku), 1);
 }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
