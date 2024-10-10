@@ -11,11 +11,7 @@ using std::endl;
 
 const size_t SIZE = 9;
 
-#include <sudokuRB.h>
-
-/*
- * YOUR CODE GOES HERE
- */
+#include <sudoku.h>
 
 // Return:
 //         1 if sudoku matrix complies to all Sudoku rules

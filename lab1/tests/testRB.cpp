@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <sudokuRB.h>
+#include <sudoku.h> 
 
 TEST(SearchKeyTests, KeyFoundInArray) {
     unsigned arr[] = {1, 2, 3, 4, 5};
