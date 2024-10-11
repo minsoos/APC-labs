@@ -51,6 +51,7 @@ int main()
     res = check_sudoku(sudoku2);
     cout << "check_sudoku returns: " <<  res << endl;
 
+
     return 0;
 }
 
