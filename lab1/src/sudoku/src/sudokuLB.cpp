@@ -1,6 +1,85 @@
-#include <iostream>
-#include <sudoku.h>
+using std::cin;
+using std::endl;
 
+const size_t SIZE = 9;
+
+
+int basic_search(const unsigned v[], unsigned n_elements);
+/*int basic_search_autonoma(const unsigned v[], unsigned n_elements);*/
+
+int check_rows(const unsigned sudoku[][SIZE]);
+int check_cols(const unsigned sudoku[][SIZE]);
+int check_regions(const unsigned sudoku[][SIZE]);
+
+/*
+bool check_row(unsigned row, const unsigned sudoku[][SIZE]); //row like index in vec(row 3->check_row(2,...)
+bool check_col(unsigned col, const unsigned sudoku[][SIZE] ); //col like index in vec(col 3->check_col(2,...)
+bool check_box(unsigned box, const unsigned sudoku[][SIZE] ); //box like index in vec(box 3->check_box(2,...)
+*/
+
+void compute_box_idx(int &x,int &y);
+
+void display_board(const unsigned board[][SIZE]);
+
+// Return:
+//         1 if sudoku matrix complies to all Sudoku rules
+//        -1 if a row violates the game rules
+//        -2 if a column violates the game rules
+//        -3 if a region violates the game rules
+int check_sudoku(const unsigned sudoku[][SIZE]);
+
+// Create a Sudoku matrix by Lewis' Algorithm
+// (https://en.wikipedia.org/wiki/Sudoku_solving_algorithms)
+void generate_sudoku(unsigned sudoku[][SIZE]);
+
+int main()
+{
+    // initialize a sudoku matrix
+    unsigned sudoku[SIZE][SIZE] = {
+            {1,2,3,4,5,6,7,8,9},
+            {2,3,4,5,6,7,8,9,1},
+            {3,4,5,6,7,8,9,1,2},
+            {4,5,6,7,8,9,1,2,3},
+            {5,6,7,8,9,1,2,3,4},
+            {6,7,8,9,1,2,3,4,5},
+            {7,8,9,1,2,3,4,5,6},
+            {8,9,1,2,3,4,5,6,7},
+            {9,1,2,3,4,5,6,7,8}
+    };
+
+    // check
+    int res = check_sudoku(sudoku);
+    //display_board(sudoku); //print entire sudoku
+    cout << "check_sudoku returns: " <<  res << endl;
+
+    // initialize another sudoku matrix
+    unsigned sudoku2[SIZE][SIZE];
+    generate_sudoku(sudoku2);
+
+    // check
+    res = check_sudoku(sudoku2);
+    //display_board(sudoku2); //print entire sudoku
+    cout << "check_sudoku returns: " <<  res << endl;
+
+
+    unsigned sudoku3[SIZE][SIZE]={
+        {1,2,8,4,5,6,7,8,9},
+        {4,5,6,7,8,9,1,2,3},
+        {7,3,9,1,2,3,4,5,6},
+        {2,8,4,5,6,7,8,9,1},
+        {5,6,7,8,9,1,2,3,4},
+        {8,9,1,2,3,4,5,6,7},
+        {3,4,5,6,7,8,9,1,2},
+        {6,7,3,9,1,2,3,4,5},
+        {9,1,2,3,4,5,6,7,8}
+    };
+    // check
+    res = check_sudoku(sudoku3);
+    //display_board(sudoku2); //print entire sudoku
+    cout << "check_sudoku returns: " <<  res << endl;
+
+    return 0;
+}
 
 int search_key (const unsigned v[], unsigned n_elements, unsigned key)
 {
@@ -12,6 +91,7 @@ int search_key (const unsigned v[], unsigned n_elements, unsigned key)
 
     return key_found;
 }
+
 
 
 int basic_search(const unsigned v[], unsigned n_elements) {
@@ -26,6 +106,7 @@ int basic_search(const unsigned v[], unsigned n_elements) {
     return check;
 }
 
+/*
 int basic_search_autonoma(const unsigned v[], unsigned n_elements) {
     int check=1, to_check=1, i=0;
     //check is treated like boolean, to_check are values from 1 to n_elem, i is index of v
@@ -43,8 +124,9 @@ int basic_search_autonoma(const unsigned v[], unsigned n_elements) {
     }
     return check;
 }
+*/
 
-/*
+
 //####### V2 ##########
 int check_rows (const unsigned sudoku[][SIZE]) {
     unsigned vec[SIZE];
@@ -99,9 +181,9 @@ void compute_box_idx(int &x,int &y){ //x input is number of box, y input is posi
     y=pos%3 + add_term_y;
 }
 //###### END ##########
-*/
 
 
+/*
 //###### V1 ###########
 int check_rows (const unsigned sudoku[][SIZE]) {
     int check=1;
@@ -213,6 +295,42 @@ bool check_box(const unsigned box, const unsigned sudoku[][SIZE]) {
     //return 1 if exited because check>SIZE and all good, return 0 otherwise
     return num_hap==1;
 }
+//###### END ##########
+*/
+
+
+int check_sudoku(const unsigned sudoku[][SIZE])
+{
+    int rows=check_rows(sudoku), cols=check_cols(sudoku), box=check_regions(sudoku);
+    if(rows==0)
+        //rows check failed
+        return -1;
+    if(cols==0)
+        //cols check failed
+        return -2;
+    if(box==0)
+        //box search failed
+        return -3;
+    return 1;
+}
+
+void generate_sudoku(unsigned sudoku[][SIZE])
+{
+    int x = 0;
+    for (size_t i=1; i<=3; ++i)
+    {
+        for (size_t j=1; j<=3; ++j)
+        {
+            for (size_t k=1; k<=SIZE; ++k)
+            {
+                sudoku[3*(i-1)+j-1][k-1] = (x % SIZE) + 1;
+                x++;
+            }
+            x += 3;
+        }
+        x++;
+    }
+}
 
 void display_board(const unsigned board[][SIZE]) {
     bool printed=false; //used to print horizontal line
@@ -235,4 +353,3 @@ void display_board(const unsigned board[][SIZE]) {
                 std::cout<<std::endl;
         }
     }
-}
